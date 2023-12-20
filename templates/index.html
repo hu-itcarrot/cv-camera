@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <style>
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            /*				background: red;*/
+            margin-left: 50px;
+            font-size: 20px;
+        {#justify-content: space-around;#}
+        }
+
+        .notice {
+            width: 100%;
+            height: 80px;
+        {#background: gray;#}
+        }
+
+        .add {
+            width: 600px;
+            flex: 0 2 auto;
+            /*				background-color:coral;*/
+        }
+
+        .table-list {
+            width: 800px;
+            height: 100%;
+            flex-direction: column;
+            margin-left: 200px;
+            justify-content: space-between;
+        }
+
+        .camera-list {
+            width: 100%;
+            height: 550px;
+            flex: 0 3 100%; /*这里flex-basis值相当于是800px*/
+            overflow-y: scroll;
+            /*				background-color:lightblue;*/
+        }
+
+        .res {
+        {#width: 100%;#}{#height: 300px;#}{#background: lightgray;#}
+        }
+
+        title {
+            margin-top: 50px;
+        {#overflow: hidden;#}
+        }
+
+    </style>
+</head>
+<body>
+<div class="title">
+    <h1 align="center">监控后台操作系统</h1>
+</div>
+<div class="notice">
+
+</div>
+<div class="container">
+    <div class="add">
+        <form action="/add" method="post">
+            <div class="form-group">
+                <label for="c-id">摄像头编号:</label>
+                <input name="c-id" type="text" class="form-control" id="c-id" placeholder="输入摄像头编号">
+            </div>
+            <div class="form-group">
+                <label for="c-ad">摄像头地址:</label>
+                <input name="c-ad" type="text" class="form-control" id="c-ad" placeholder="输入视频流地址（rtsp://）">
+            </div>
+            <div class="form-group">
+                <label for="c-posi">摄像头位置:</label>
+                <input name="c-posi" type="text" class="form-control" id="c-posi" placeholder="输入摄像头位置">
+            </div>
+            <div class="form-group">
+                <label for="c-up">图片上传地址:</label>
+                <input name="c-up" type="text" class="form-control" id="c-up" placeholder="输入图片上传地址">
+            </div>
+            <div class="form-group">
+                <label for="c-class">检测等级:</label>
+                <input name="c-class" type="text" class="form-control" id="c-class" placeholder="输入检测等级">
+            </div>
+            <div class="form-group">
+                <label for="c-time">时间间隔:</label>
+                <input name="c-time" type="text" class="form-control" id="c-time" placeholder="输入时间间隔">
+            </div>
+            <br>
+            {% if state == 'True' %}
+                <button type="submit" class="btn btn-primary" disabled>添加</button>
+            {% else %}
+                <button type="submit" class="btn btn-primary">添加</button>
+            {% endif %}
+        </form>
+    </div>
+    <div class="table-list">
+        <div class="camera-list">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">编号</th>
+                    <th scope="col">位置</th>
+                    <th scope="col">检测等级</th>
+                    <th scope="col">间隔时间</th>
+                    <th scope="col">删除</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in items %}
+                    <tr>
+                        <th scope="row">{{ item.c_id }}</th>
+                        <td>{{ item.camera_posi }}</td>
+                        <td>{{ item.class_id }}</td>
+                        <td>{{ item.camera_time }}</td>
+                        {% if state == 'True' %}
+                            <td><a class="btn btn-primary disabled" href="/del/{{ item.id }}" role="button">删除</a></td>
+                        {% else %}
+                            <td><a class="btn btn-primary" href="/del/{{ item.id }}" role="button">删除</a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="btn">
+            {% if state == 'True' %}
+                <a href="/start" class="btn btn-primary btn-lg active disabled" role="button" aria-pressed="true">启动</a>
+            {% else %}
+                <a href="/start" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">启动</a>
+            {% endif %}
+            {% if state == 'True' %}
+                <a href="/pause" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">停止</a>
+            {% else %}
+                <a href="/pause" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">停止</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script src="../static/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
