@@ -21,7 +21,7 @@
    
    ```
    # 克隆代码
-   git clone https://gitee.com/zbx996/cv-camera.git
+   git clone https://github.com/hu-itcarrot/cv-camera.git
    
    
    # 修改类数目
@@ -53,7 +53,7 @@ sudo docker run --gpus all -it --name cv -p '需要映射的端口号':5000 '镜
 
 
 # 克隆代码
-git clone https://gitee.com/zbx996/cv-camera.git
+git clone https://github.com/hu-itcarrot/cv-camera.git
 
 
 # 模型转换等同上操作
@@ -61,7 +61,7 @@ git clone https://gitee.com/zbx996/cv-camera.git
 
         成功运行后可在局域网中以`ip:端口` 方式访问，以进行相关设置。
 
-<img title="" src="https://gitee.com/zbx996/drawing-bed/raw/master/examp.png" alt="" width="647" data-align="center">
+
 
 #### 使用说明
 
